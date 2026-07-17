@@ -5,7 +5,7 @@ import { profile } from "@/data/profile";
 // No next/font here on purpose: the type stack is GitHub's system-font stack,
 // declared as --font-sans in globals.css. Nothing is downloaded.
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.headline}`,
+  title: `${profile.name} · ${profile.headline}`,
   description: profile.bio,
   openGraph: {
     title: profile.name,

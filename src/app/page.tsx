@@ -41,7 +41,12 @@ export default function Home() {
           <Section id="interests" title="Research Interests">
             <ul className="list-disc space-y-1 pl-5 marker:text-fg-subtle">
               {researchInterests.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.title}>
+                  <span className="font-semibold text-fg-default">
+                    {item.title}:
+                  </span>{" "}
+                  <span className="text-fg-muted">{item.text}</span>
+                </li>
               ))}
             </ul>
           </Section>
@@ -71,7 +76,7 @@ export default function Home() {
         </Section>
 
         {experiences.length ? (
-          <Section id="experience" title="Research Experiences">
+          <Section id="experience" title="Experience">
             <ul className="space-y-5">
               {experiences.map((item) => (
                 <li key={item.role + item.org}>
@@ -167,7 +172,7 @@ export default function Home() {
                 >
                   <span>
                     <span className="font-semibold text-fg-default">{item.course}</span>
-                    <span className="text-fg-muted"> — {item.role}</span>
+                    <span className="text-fg-muted">, {item.role}</span>
                   </span>
                   <span className="font-mono text-sm text-fg-subtle">{item.term}</span>
                 </li>
@@ -196,7 +201,7 @@ export default function Home() {
                 >
                   <span>
                     <span className="font-semibold text-fg-default">{item.title}</span>
-                    <span className="text-fg-muted"> — {item.detail}</span>
+                    <span className="text-fg-muted">, {item.detail}</span>
                   </span>
                   <span className="font-mono text-sm text-fg-subtle">{item.date}</span>
                 </li>
@@ -222,8 +227,7 @@ export default function Home() {
       </div>
 
       <footer className="mt-16 border-t border-border-default pt-6 text-center text-sm text-fg-subtle">
-        © {new Date().getFullYear()} {profile.name} · Built with Next.js, hosted on
-        GitHub Pages
+        © {new Date().getFullYear()} {profile.name}
       </footer>
     </main>
   );

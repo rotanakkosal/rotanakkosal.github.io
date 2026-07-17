@@ -4,42 +4,81 @@
  * components. To drop a section entirely, empty its array (the section then
  * renders nothing) or remove it from `src/app/page.tsx`.
  *
- * Placeholders are marked TODO so you can grep for what's left.
+ * Sources:
+ *   - CHHUN_ROTANAKKOSAL_Resume-V4.pdf
+ *   - https://aiconvergencelab.com/members/chhun-rotanakkosal.html
+ *
+ * Deliberately NOT published here (they are in the CV, but do not belong on a
+ * public page): personal mobile number, home address, date of birth, gender,
+ * marital status, and referees' private contact details.
  */
 
 export type Link = { label: string; href: string };
 
 export const profile = {
-  name: "Your Name", // TODO
-  headline: "M.S. Student, Computer Science", // TODO
-  affiliation: "Your University", // TODO
-  // Short intro paragraph under the photo. Keep it to 2–3 sentences.
+  name: "CHHUN Rotanakkosal",
+  headline: "M.S. Student, Big Data",
+  affiliation: "Chungbuk National University",
   bio:
-    "TODO: One or two sentences on what you research and why it matters. " +
-    "Mention your lab, your advisor, and the through-line of your work.",
-  // Drop a square photo in `public/` and point this at it (e.g. "/profile.jpg").
-  photo: "/profile.svg",
-  email: "you@example.com", // TODO
-  cv: "/cv.pdf", // Drop your CV at `public/cv.pdf`, or set to "" to hide the link.
+    "I want machines to understand what they see well enough to act on it. " +
+    "I am an integrated M.S. student in Big Data at Chungbuk National " +
+    "University, working at the AI Convergence Lab (AICLab) on multimodal " +
+    "models that connect vision and language, and on the perception that " +
+    "stands between a model and a robot that can pick something up.",
+  // Square 400x400 crop of the formal portrait, resized for the web.
+  photo: "/profile.jpg",
+  email: "ch.rotanakkosal@chungbuk.ac.kr",
+  // Hidden until a public-safe CV exists (the current PDF contains personal
+  // details and referees' private contact info). Set to "/cv.pdf" to re-enable.
+  cv: "",
   links: [
-    { label: "Google Scholar", href: "https://scholar.google.com/citations?user=TODO" },
-    { label: "GitHub", href: "https://github.com/TODO" },
-    { label: "X", href: "https://x.com/TODO" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/TODO" },
+    { label: "GitHub", href: "https://github.com/rotanakkosal" },
+    {
+      label: "LinkedIn",
+      href: "https://kh.linkedin.com/in/chhun-rotanakkosal-717a6222b",
+    },
+    {
+      label: "Lab",
+      href: "https://aiconvergencelab.com/members/chhun-rotanakkosal.html",
+    },
+    // TODO: add Google Scholar once you have a profile.
   ] satisfies Link[],
 };
 
 /** Dated one-liners. Newest first. This is the first thing visitors read. */
 export const news: { date: string; text: string }[] = [
-  { date: "Jul. 2026", text: "TODO: Paper accepted to <venue>." },
-  { date: "May. 2026", text: "TODO: Started a research internship at <company>." },
-  { date: "Feb. 2026", text: "TODO: Released <project> — code and models are public." },
+  {
+    date: "Sep. 2025",
+    text: "Began my integrated M.S. in Big Data at Chungbuk National University, joining the AI Convergence Lab.",
+  },
+  {
+    date: "2025",
+    text: "Presented work on continuous integration and deployment in modern DevOps practices at FITAT 2025.",
+  },
+  {
+    date: "Aug. 2024",
+    text: "Presented work on RAG ranking with leave-one-out reward supervision and DPO at BIGDAS 2024, Jeju Island.",
+  },
 ];
 
-export const researchInterests: string[] = [
-  "TODO: Multimodal Large Language Models (MLLMs)",
-  "TODO: Reasoning and planning in LLM agents",
-  "TODO: Efficient training and inference",
+/** Four topics, one short line each. Keep them terse. */
+export const researchInterests: { title: string; text: string }[] = [
+  {
+    title: "Large language models",
+    text: "agents, retrieval, and preference optimization.",
+  },
+  {
+    title: "Computer vision",
+    text: "object detection and visual perception.",
+  },
+  {
+    title: "Multimodal models",
+    text: "grounding language in what a model sees.",
+  },
+  {
+    title: "Physical AI",
+    text: "perception for autonomous robotic manipulation.",
+  },
 ];
 
 export const education: {
@@ -49,16 +88,24 @@ export const education: {
   detail?: string;
 }[] = [
   {
-    degree: "M.S. in Computer Science",
-    school: "Your University",
-    period: "Mar. 2025 – present",
-    detail: "TODO: Advisor: Prof. <name>. Lab: <lab name>.",
+    degree: "M.S. in Big Data (Integrated)",
+    school: "Chungbuk National University",
+    period: "Sep. 2025 – present",
+    detail: "AI Convergence Lab (AICLab).", // TODO: add your advisor's name.
   },
   {
     degree: "B.S. in Computer Science",
-    school: "Your Undergrad University",
-    period: "Mar. 2021 – Feb. 2025",
-    detail: "TODO: GPA, honors, or thesis title.",
+    school: "Royal University of Phnom Penh",
+    period: "Nov. 2019 – Jun. 2023",
+  },
+  {
+    degree: "Software Engineering Trainee",
+    school: "Foundation for Korea Software Global Aid",
+    period: "Feb. 2022 – Dec. 2022",
+    detail:
+      "Intensive program in Java/J2EE, Spring, web development, and databases, " +
+      "followed by an advanced DevOps track: Linux, Docker, Kubernetes, Jenkins, " +
+      "Ansible, GitOps (ArgoCD), and AWS.",
   },
 ];
 
@@ -76,39 +123,28 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
-    title: "TODO: Title of your first paper",
-    authors: "**Your Name**, Coauthor One, Coauthor Two",
-    venue: "NeurIPS",
-    year: "2026",
+    title:
+      "The Role of Continuous Integration and Continuous Deployment in Modern DevOps Practices",
+    authors:
+      "**Rotanakkosal Chhun**, Vungsovanreach Kong, Sokheang Chan, Naro Vorn, Tae-Kyung Kim",
+    venue:
+      "17th International Conference on Frontiers of Information Technology, Application and Tools (FITAT)",
+    year: "2025",
     category: "International Conference",
-    thumbnail: "", // e.g. "/pubs/paper-1.png"
-    links: [
-      { label: "arXiv", href: "#" },
-      { label: "PDF", href: "#" },
-      { label: "Code", href: "#" },
-      { label: "Project", href: "#" },
-    ],
+    thumbnail: "", // e.g. "/pubs/fitat-2025.png"
+    links: [], // TODO: add [PDF] / [Code] links if available.
   },
   {
-    title: "TODO: Title of a workshop paper",
-    authors: "**Your Name**, Coauthor One",
-    venue: "ICML Workshop on <topic>",
-    year: "2025",
-    category: "Workshop",
+    title:
+      "Enhancing RAG Ranking with Leave-One-Out Reward Supervision and Direct Preference Optimization",
+    authors:
+      "**Rotanakkosal Chhun**, Sokheang Chan, Vungsovanreach Kong, Tae-Kyung Kim",
+    venue:
+      "12th International Conference on Big Data Applications and Services (BIGDAS), Jeju Island, Korea",
+    year: "2024",
+    category: "International Conference",
     thumbnail: "",
-    links: [{ label: "arXiv", href: "#" }],
-  },
-  {
-    title: "TODO: Title of a preprint",
-    authors: "**Your Name**, Coauthor One, Coauthor Two",
-    venue: "arXiv:2501.00000",
-    year: "2025",
-    category: "Preprint",
-    thumbnail: "",
-    links: [
-      { label: "arXiv", href: "#" },
-      { label: "Code", href: "#" },
-    ],
+    links: [],
   },
 ];
 
@@ -127,19 +163,24 @@ export const experiences: {
   bullets: string[];
 }[] = [
   {
-    role: "Research Intern",
-    org: "TODO: Company / Lab",
+    role: "Researcher",
+    org: "AI Convergence Lab, Chungbuk National University",
     period: "Sep. 2025 – present",
     bullets: [
-      "TODO: What you built or studied, and the result.",
-      "TODO: Quantify the outcome if you can — a number lands harder than an adjective.",
+      "Research on computer vision and LLM integration for multimodal systems.",
+      "Robotic vision for autonomous manipulation.",
+      // TODO: add specifics — what you are building, and the result so far.
     ],
   },
   {
-    role: "Undergraduate Researcher",
-    org: "TODO: Lab name",
-    period: "Mar. 2024 – Feb. 2025",
-    bullets: ["TODO: Project description and outcome."],
+    role: "IT Instructor",
+    org: "Foundation for Korea Software Global Aid / Korea Software HRD Center",
+    period: "Jan. 2023 – mid 2025",
+    bullets: [
+      "Set up and maintained the center's server infrastructure.",
+      "Self-directed research alongside teaching: ran LLM agents locally on a GPU server with Ollama, and explored OpenManus for web research, code generation, and multi-agent workflows.",
+      "Built ML and computer vision foundations: classical algorithms, CNNs, and YOLO object detection, including training YOLO on custom data.",
+    ],
   },
 ];
 
@@ -152,53 +193,38 @@ export type Project = {
   links?: Link[];
 };
 
-export const projects: Project[] = [
-  {
-    name: "TODO: Project name",
-    description:
-      "TODO: One or two sentences on what it does and why you built it.",
-    tags: ["PyTorch", "CUDA"],
-    thumbnail: "", // e.g. "/projects/project-1.png"
-    links: [
-      { label: "Repo", href: "#" },
-      { label: "Demo", href: "#" },
-    ],
-  },
-  {
-    name: "TODO: Another project",
-    description: "TODO: Short description.",
-    tags: ["Next.js", "TypeScript"],
-    thumbnail: "",
-    links: [{ label: "Repo", href: "#" }],
-  },
-];
+/**
+ * Empty by choice — the web-development work is deliberately not showcased here.
+ * The section hides itself while this array is empty; add entries to bring it back.
+ */
+export const projects: Project[] = [];
 
+// TODO: add talks. Empty array = the section is hidden.
 export const talks: { title: string; venue: string; date: string; links?: Link[] }[] =
-  [
-    {
-      title: "TODO: Talk title",
-      venue: "TODO: Venue or seminar",
-      date: "Jun. 2026",
-      links: [{ label: "Slides", href: "#" }],
-    },
-  ];
+  [];
 
-export const teaching: { course: string; role: string; term: string }[] = [
-  { course: "TODO: CS101 — Intro to Programming", role: "Teaching Assistant", term: "Fall 2025" },
-];
+// Empty by choice — the teaching record is deliberately not showcased here.
+// The section hides itself while this array is empty.
+export const teaching: { course: string; role: string; term: string }[] = [];
 
-export const service: string[] = [
-  "TODO: Reviewer — NeurIPS 2026, ICML 2026",
-  "TODO: Student volunteer — ACL 2025",
-];
+// TODO: add reviewing / organizing roles. Empty array = the section is hidden.
+export const service: string[] = [];
 
-export const honors: { title: string; detail: string; date: string }[] = [
-  { title: "TODO: Scholarship or award name", detail: "TODO: Awarding body", date: "2025" },
-  { title: "TODO: Another honor", detail: "TODO: Awarding body", date: "2024" },
-];
+// Empty by choice — the section hides itself while this array is empty.
+// (Removed: Best Employee Award, Korea Software HRD Center, 2024.)
+export const honors: { title: string; detail: string; date: string }[] = [];
 
 export const skills: { group: string; items: string[] }[] = [
-  { group: "Languages", items: ["Python", "TypeScript", "C++"] },
-  { group: "ML", items: ["PyTorch", "JAX", "Hugging Face"] },
-  { group: "Tools", items: ["Git", "Docker", "Slurm"] },
+  { group: "Languages", items: ["Python", "Java", "C++", "Swift", "SQL"] },
+  {
+    group: "ML & Vision",
+    items: ["CNNs", "YOLO", "Classical ML", "Ollama", "LLM agents"],
+  },
+  // Condensed from separate Web and DevOps groups: kept as supporting evidence
+  // that you can build and run systems, without competing with the research.
+  {
+    group: "Engineering",
+    items: ["Linux", "Docker", "Kubernetes", "CI/CD", "Next.js", "PostgreSQL"],
+  },
+  { group: "Spoken", items: ["Khmer (native)", "English"] },
 ];
