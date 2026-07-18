@@ -35,7 +35,7 @@ export const profile = {
     { label: "GitHub", href: "https://github.com/rotanakkosal" },
     {
       label: "LinkedIn",
-      href: "https://kh.linkedin.com/in/chhun-rotanakkosal-717a6222b",
+      href: "https://www.linkedin.com/in/chhun-rotanakkosal/",
     },
     {
       label: "Lab",
