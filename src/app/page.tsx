@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { ProfileHeader } from "@/components/profile-header";
 import { PublicationList } from "@/components/publication-list";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { Section } from "@/components/section";
 import { Thumbnail } from "@/components/thumbnail";
 import {
@@ -361,6 +362,8 @@ export default function Home() {
           </a>
         </footer>
       </main>
+
+      <ScrollToTop />
     </>
   );
 }
