@@ -1,18 +1,28 @@
 import Image from "next/image";
 
 /**
- * Fixed-size figure for publication and project entries. Falls back to a
- * neutral placeholder block when no image path is set, so the layout stays
- * stable while you are still filling content in.
+ * Fixed-size figure for publication and project entries. When no image path is
+ * set it falls back to a typographic placeholder (e.g. the publication year in
+ * the display serif) so the layout stays stable while content is filled in.
  */
-export function Thumbnail({ src, alt }: { src?: string; alt: string }) {
+export function Thumbnail({
+  src,
+  alt,
+  fallback,
+}: {
+  src?: string;
+  alt: string;
+  fallback?: string;
+}) {
   if (!src) {
     return (
       <div
         aria-hidden
-        className="flex h-[88px] w-[152px] shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas-subtle text-xs text-fg-subtle"
+        className="flex h-[88px] w-[132px] shrink-0 items-center justify-center rounded-lg border border-border-default bg-canvas-subtle sm:w-[152px]"
       >
-        no image
+        <span className="font-display text-2xl italic text-fg-subtle">
+          {fallback ?? "—"}
+        </span>
       </div>
     );
   }
@@ -23,7 +33,7 @@ export function Thumbnail({ src, alt }: { src?: string; alt: string }) {
       alt={alt}
       width={152}
       height={88}
-      className="h-[88px] w-[152px] shrink-0 rounded-md border border-border-default bg-canvas-subtle object-cover"
+      className="h-[88px] w-[132px] shrink-0 rounded-lg border border-border-default bg-canvas-subtle object-cover sm:w-[152px]"
     />
   );
 }

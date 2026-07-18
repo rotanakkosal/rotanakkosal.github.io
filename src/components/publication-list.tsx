@@ -25,18 +25,18 @@ function Authors({ value }: { value: string }) {
 
 function Entry({ pub }: { pub: Publication }) {
   return (
-    <li className="flex gap-4">
-      <Thumbnail src={pub.thumbnail} alt={pub.title} />
+    <li className="group flex flex-col gap-4 rounded-xl border border-border-default bg-card-bg p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-fg/50 hover:shadow-[0_16px_40px_-24px_rgba(32,29,23,0.4)] sm:flex-row sm:gap-5 sm:p-5">
+      <Thumbnail src={pub.thumbnail} alt={pub.title} fallback={pub.year} />
       <div className="min-w-0">
-        <p className="font-semibold text-fg-default">{pub.title}</p>
-        <p className="mt-0.5 text-sm text-fg-muted">
+        <p className="font-semibold leading-snug text-fg-default">{pub.title}</p>
+        <p className="mt-1.5 text-sm text-fg-muted">
           <Authors value={pub.authors} />
         </p>
-        <p className="mt-0.5 text-sm italic text-fg-muted">
+        <p className="mt-1 text-sm italic text-fg-muted">
           {pub.venue}, {pub.year}
         </p>
         {pub.links?.length ? (
-          <p className="mt-1.5 flex flex-wrap gap-x-3 text-sm">
+          <p className="mt-2 flex flex-wrap gap-x-3 font-mono text-sm">
             {pub.links.map((link) => (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
                 [{link.label}]
@@ -60,11 +60,13 @@ export function PublicationList() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {[...present, ...extra].map((category) => (
         <div key={category}>
-          <h3 className="mb-3 text-base text-fg-muted">{category}</h3>
-          <ul className="space-y-5">
+          <h3 className="mb-3 font-mono text-xs font-normal uppercase tracking-[0.2em] text-fg-subtle">
+            {category}
+          </h3>
+          <ul className="space-y-4">
             {publications
               .filter((p) => p.category === category)
               .map((pub) => (
