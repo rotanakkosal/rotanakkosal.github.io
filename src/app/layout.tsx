@@ -1,9 +1,28 @@
 import type { Metadata } from "next";
+import { Fraunces, Instrument_Sans, Spline_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/profile";
 
-// No next/font here on purpose: the type stack is GitHub's system-font stack,
-// declared as --font-sans in globals.css. Nothing is downloaded.
+/*
+ * Self-hosted at build time by next/font — nothing is fetched at runtime,
+ * which keeps the static export fully offline-friendly.
+ */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
+const splineSansMono = Spline_Sans_Mono({
+  subsets: ["latin"],
+  variable: "--font-code",
+});
+
 export const metadata: Metadata = {
   title: `${profile.name} · ${profile.headline}`,
   description: profile.bio,
@@ -20,7 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className={`h-full antialiased ${fraunces.variable} ${instrumentSans.variable} ${splineSansMono.variable}`}
+    >
       <body className="min-h-full">{children}</body>
     </html>
   );

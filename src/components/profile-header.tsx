@@ -5,44 +5,72 @@ import { CoolMode } from "@/components/ui/cool-mode";
 import { profile } from "@/data/profile";
 
 /**
- * Name, photo, bio and contact links. Client-side because CoolMode attaches
- * pointer listeners — that is fine under `output: "export"`, it just ships a
- * little JS for this subtree.
+ * Asymmetric hero: kicker + oversized serif name + bio on the left, photo in
+ * an offset accent frame on the right. Client-side because CoolMode attaches
+ * pointer listeners — fine under `output: "export"`.
  */
 export function ProfileHeader() {
-  return (
-    <header className="flex flex-col items-center text-center">
-      <h1 className="tracking-tight">{profile.name}</h1>
+  // Family name upright, given name in italic accent serif.
+  const [familyName, ...givenParts] = profile.name.split(" ");
+  const givenName = givenParts.join(" ");
 
-      <p className="mt-1 text-fg-muted">
-        {profile.headline}
-        {profile.affiliation ? ` · ${profile.affiliation}` : ""}
-      </p>
+  // Lift the first sentence of the bio out as a pull-quote line.
+  const splitAt = profile.bio.indexOf(". ");
+  const pullQuote = splitAt === -1 ? "" : profile.bio.slice(0, splitAt + 1);
+  const bioRest = splitAt === -1 ? profile.bio : profile.bio.slice(splitAt + 2);
+
+  return (
+    <header id="top" className="grid items-center gap-10 sm:grid-cols-[1fr_auto]">
+      <div>
+        <p className="rise font-mono text-xs uppercase tracking-[0.25em] text-accent-fg">
+          {profile.headline}
+          {profile.affiliation ? ` · ${profile.affiliation}` : ""}
+        </p>
+
+        <h1 className="rise rise-1 mt-4 text-5xl sm:text-6xl">
+          {familyName}{" "}
+          {givenName ? (
+            <em className="italic text-accent-fg">{givenName}</em>
+          ) : null}
+        </h1>
+
+        {pullQuote ? (
+          <p className="rise rise-2 mt-6 max-w-xl font-display text-xl italic leading-snug text-fg-default sm:text-2xl">
+            “{pullQuote.replace(/\.$/, "")}.”
+          </p>
+        ) : null}
+
+        <p className="rise rise-3 mt-4 max-w-xl text-fg-muted">{bioRest}</p>
+      </div>
 
       {/* Click the photo for a burst of particles. */}
-      <CoolMode options={{ particleCount: 24, speedUp: 2 }}>
-        <button
-          type="button"
-          aria-label={`Photo of ${profile.name}`}
-          className="mt-6 block cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-emphasis"
-        >
-          <Image
-            src={profile.photo}
-            alt={profile.name}
-            width={180}
-            height={180}
-            priority
-            className="h-[180px] w-[180px] rounded-full border border-border-default bg-canvas-subtle object-cover"
-          />
-        </button>
-      </CoolMode>
+      <div className="rise rise-2 relative mx-auto w-fit sm:mx-0">
+        <div
+          aria-hidden
+          className="absolute inset-0 translate-x-3 translate-y-3 rotate-2 rounded-2xl border-2 border-accent-fg/70"
+        />
+        <CoolMode options={{ particleCount: 24, speedUp: 2 }}>
+          <button
+            type="button"
+            aria-label={`Photo of ${profile.name}`}
+            className="relative block cursor-pointer rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-emphasis"
+          >
+            <Image
+              src={profile.photo}
+              alt={profile.name}
+              width={208}
+              height={208}
+              priority
+              className="h-[176px] w-[176px] rounded-2xl border border-border-default bg-canvas-subtle object-cover sm:h-52 sm:w-52"
+            />
+          </button>
+        </CoolMode>
+      </div>
 
-      <p className="mt-6 max-w-2xl text-left text-fg-muted">{profile.bio}</p>
-
-      <nav className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
+      <nav className="rise rise-4 flex flex-wrap items-center gap-2 sm:col-span-2">
         <a
           href={`mailto:${profile.email}`}
-          className="rounded-md border border-border-default px-3 py-1 text-sm no-underline hover:bg-canvas-subtle hover:no-underline"
+          className="rounded-full bg-fg-default px-4 py-1.5 font-mono text-sm text-canvas-default no-underline transition-colors hover:bg-accent-emphasis hover:no-underline"
         >
           {profile.email}
         </a>
@@ -52,7 +80,7 @@ export function ProfileHeader() {
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="rounded-md border border-border-default px-3 py-1 text-sm no-underline hover:bg-canvas-subtle hover:no-underline"
+            className="rounded-full border border-border-default bg-card-bg px-4 py-1.5 text-sm text-fg-default no-underline transition-colors hover:border-accent-fg hover:text-accent-fg hover:no-underline"
           >
             {link.label}
           </a>
@@ -60,7 +88,7 @@ export function ProfileHeader() {
         {profile.cv ? (
           <a
             href={profile.cv}
-            className="rounded-md border border-border-default bg-canvas-subtle px-3 py-1 text-sm font-medium no-underline hover:bg-accent-subtle hover:no-underline"
+            className="rounded-full border border-accent-fg bg-accent-subtle px-4 py-1.5 text-sm font-medium text-accent-fg no-underline hover:bg-accent-fg hover:text-canvas-default hover:no-underline"
           >
             CV
           </a>
